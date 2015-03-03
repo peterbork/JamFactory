@@ -34,5 +34,9 @@ namespace JamFactory.View.Group_B {
             
             Controller.ProductionController.CheckLogin(PersonID, Password);
         }
+
+        private void Closebutton_Click(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
     }
 }
