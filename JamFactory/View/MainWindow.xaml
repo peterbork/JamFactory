@@ -1,0 +1,18 @@
+﻿<Window x:Class="JamFactory.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="300" Width="300">
+    <Grid>
+        <Button Content="Group A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="103,95,0,0" Click="Button_Click"/>
+        <Button Content="Group B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="103,131,0,0" Click="Button_Click_1"/>
+        <Button Content="Group C" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="103,158,0,0" Click="Button_Click_2"/>
+        <Button Content="Group D" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="103,185,0,0" Click="Button_Click_3"/>
+        <Button Content="Group E" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="103,212,0,0" Click="Button_Click_4"/>
+        
+        
+       
+       
+        
+
+    </Grid>
+</Window>
