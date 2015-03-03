@@ -5,18 +5,17 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JamFactory.Model;
 
-namespace JamFactory.Controller.Database
-{
-    public class ProductionDB
-    {
+namespace JamFactory.Controller.Database {
+    public class ProductionDB {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl20_db;" + "User Id=ejl20_usr;" + "Password=Baz1nga20;";
 
-        public static CheckLogin(int PersonID, string Password)
+        public static void CheckLogin(int PersonID, string Password)
         {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand("2_CheckLogin", conn);
                     conn.Open();
@@ -34,20 +33,18 @@ namespace JamFactory.Controller.Database
                     else
                     {
 
-                    }
+                }
 
 
-                }
-                catch (Exception E)
-                {
-                    throw E;
-                }
-                finally
-                {
-                    conn.Close();
-                    conn.Dispose();
-                }
+            }
+            catch (Exception E) {
+                throw E;
+            }
+            finally
+            {
+
             }
         }
+
     }
 }
