@@ -22,13 +22,17 @@ namespace JamFactory.View.Group_B {
 
         }
 
-        private void LogInbutton_Click(object sender, RoutedEventArgs e) {
-            
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e) {
             View.Group_B.ScheduleView Schedule = new View.Group_B.ScheduleView();
             Schedule.Show();
+        }
+
+        private void LogInbutton_Click(object sender, RoutedEventArgs e)
+        {
+            int PersonID = int.Parse(PersonIDTextBox.Text);
+            string Password = PasswordBox.Password;
+            
+            Controller.ProductionController.CheckLogin(PersonID, Password);
         }
     }
 }
