@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JamFactory.Model;
 
 // Controller for group B
 namespace JamFactory.Controller {
@@ -11,8 +12,8 @@ namespace JamFactory.Controller {
         {
             Database.ProductionDB.CheckLogin(personID, password);
         }
-        public void GetTasks(int Week) { 
-        
+        public void GetTask(int Week) { 
+
         }
     }
 }
