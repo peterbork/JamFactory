@@ -14,15 +14,26 @@ namespace JamFactory.Controller.Database
 
         public static void CheckLogin(int PersonID, string Password)
         {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            try
             {
-                SqlCommand cmd = new SqlCommand("2_CheckLogin", conn);
-                conn.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@PersonID", PersonID));
-                cmd.Parameters.Add(new SqlParameter("@Password", Password));
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("2_CheckLogin", conn);
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@PersonID", PersonID));
+                    cmd.Parameters.Add(new SqlParameter("@Password", Password));
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+            finally
+            {
+
             }
         }
     }
