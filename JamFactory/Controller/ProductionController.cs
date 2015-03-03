@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 // Controller for group B
 namespace JamFactory.Controller {
-    class ProductionController {
+    public class ProductionController {
         public static void CheckLogin(int personID, string password)
         {
-            Database.ProductionDB.CheckLogin(5, "sssgs");
+            Database.ProductionDB.CheckLogin(personID, password);
         }
         public void GetTasks(int Week) { 
         
