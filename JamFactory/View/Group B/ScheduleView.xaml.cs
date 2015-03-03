@@ -28,6 +28,8 @@ namespace JamFactory.View.Group_B {
             CurrentWeek.Content = "Week " + CurrentWeekNumber;
             WeekStartDate.Content = Dates.FirstDateOfWeek(CurrentWeekNumber, CultureInfo.CurrentCulture);
             WeekEndDate.Content = Dates.LastDateOfWeek(CurrentWeekNumber, CultureInfo.CurrentCulture);
+
+            Controller.Database.ProductionDB.GetTask()
         }
 
         private void NextWeek1_Click(object sender, RoutedEventArgs e) {

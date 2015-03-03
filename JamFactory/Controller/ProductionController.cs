@@ -12,8 +12,9 @@ namespace JamFactory.Controller {
         {
             Database.ProductionDB.CheckLogin(personID, password);
         }
-        public void GetTask(int Week) { 
-
+        Employee _employee = new Employee(2, "sad", Convert.ToDateTime("2002-09-24 08:00:00.000"), "Peter");
+        public void GetTask(Model.Employee employee, DateTime starttime, DateTime endtime) {
+            Database.ProductionDB.GetTask(_employee, starttime, endtime);
         }
     }
 }
