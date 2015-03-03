@@ -12,28 +12,41 @@ namespace JamFactory.Controller.Database
     {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl20_db;" + "User Id=ejl20_usr;" + "Password=Baz1nga20;";
 
-        public static void CheckLogin(int PersonID, string Password)
+        public static CheckLogin(int PersonID, string Password)
         {
-            try
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
-                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                try
                 {
                     SqlCommand cmd = new SqlCommand("2_CheckLogin", conn);
                     conn.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@PersonID", PersonID));
                     cmd.Parameters.Add(new SqlParameter("@Password", Password));
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
-            catch (Exception E)
-            {
-                throw E;
-            }
-            finally
-            {
+                    cmd.ExecuteNonQuery(); // ExecuteNonQuery is intended for UPDATE, INSERT and DELETE queries
 
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        return 5;
+                    }
+                    else
+                    {
+
+                    }
+
+
+                }
+                catch (Exception E)
+                {
+                    throw E;
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
             }
         }
     }
