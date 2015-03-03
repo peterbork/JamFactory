@@ -11,5 +11,8 @@ namespace JamFactory.Controller {
         {
             Database.ProductionDB.CheckLogin(5, "sssgs");
         }
+        public void GetTasks(int Week) { 
+        
+        }
     }
 }
