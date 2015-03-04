@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JamFactory.Model {
-    class Person {
+    public class Person {
         public string Name { get; set; }
     }
 }

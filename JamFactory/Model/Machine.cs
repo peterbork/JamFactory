@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JamFactory.Model {
-    class Machine {
+    public class Machine {
         public string Name { get; set; }
         public int Capacity { get; set; }
         public double ScrapValue { get; set; }

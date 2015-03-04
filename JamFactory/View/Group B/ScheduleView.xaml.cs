@@ -29,7 +29,7 @@ namespace JamFactory.View.Group_B {
             WeekStartDate.Content = Dates.FirstDateOfWeek(CurrentWeekNumber, CultureInfo.CurrentCulture);
             WeekEndDate.Content = Dates.LastDateOfWeek(CurrentWeekNumber, CultureInfo.CurrentCulture);
 
-            Controller.Database.ProductionDB.GetTask()
+            //Controller.ProductionController.GetTask(2, Convert.ToDateTime("2002-09-24 08:00:00.000"), Convert.ToDateTime("2002-09-24 08:00:00.000"));
         }
 
         private void NextWeek1_Click(object sender, RoutedEventArgs e) {

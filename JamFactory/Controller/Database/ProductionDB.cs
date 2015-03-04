@@ -39,24 +39,24 @@ namespace JamFactory.Controller.Database
             }
         }
 
-        public static List<Model.Task> GetTask(Model.Employee employee, DateTime starttime, DateTime endtime)
+        public static List<Model.Task> GetTask(int personid, DateTime starttime, DateTime endtime)
         {
             List<Model.Task> _Tasks = new List<Model.Task>();
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("2_CheckLogin", conn);
+                    SqlCommand cmd = new SqlCommand("2_GetTask", conn);
                     conn.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@PersonID", employee.ID));
+                    cmd.Parameters.Add(new SqlParameter("@PersonID", personid));
                     cmd.Parameters.Add(new SqlParameter("@StartTime", starttime));
                     cmd.Parameters.Add(new SqlParameter("@EndTime", endtime));
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        _Tasks.Add(new Model.Task(reader["Description"].ToString(), Convert.ToDateTime(reader["StartTime"].ToString()), Convert.ToDateTime(reader["EndTime"].ToString()), employee, new Model.Machine(reader["Name"].ToString(), int.Parse(reader["Capacity"].ToString()), int.Parse(reader["ScrapValue"].ToString()), double.Parse(reader["AcquisitionValue"].ToString()), Convert.ToDateTime(reader["LifeTime"].ToString()))));
+                        _Tasks.Add(new Model.Task(reader["Description"].ToString(), Convert.ToDateTime(reader["StartTime"].ToString()), Convert.ToDateTime(reader["EndTime"].ToString()), new Model.Employee(int.Parse(reader["ID"].ToString()), reader["Password"].ToString(), Convert.ToDateTime(reader["Hired"].ToString()), reader["Name"].ToString()), new Model.Machine(reader["Name"].ToString(), int.Parse(reader["Capacity"].ToString()), int.Parse(reader["ScrapValue"].ToString()), double.Parse(reader["AcquisitionValue"].ToString()), Convert.ToDateTime(reader["LifeTime"].ToString()))));
                     }
                 }
                 catch (SqlException E)
@@ -67,9 +67,12 @@ namespace JamFactory.Controller.Database
                 {
                     conn.Close();
                     conn.Dispose();
+
                 }
                 return _Tasks;
+                
             }
+            
         }
     }
 }
