@@ -56,7 +56,7 @@ namespace JamFactory.Controller.Database
 
                     while (reader.Read())
                     {
-                        _Tasks.Add(new Model.Task(reader["Description"].ToString(), Convert.ToDateTime(reader["StartTime"].ToString()), Convert.ToDateTime(reader["EndTime"].ToString()), new Model.Employee(int.Parse(reader["ID"].ToString()), reader["Password"].ToString(), Convert.ToDateTime(reader["Hired"].ToString()), reader["Name"].ToString()), new Model.Machine(reader["Name"].ToString(), int.Parse(reader["Capacity"].ToString()), int.Parse(reader["ScrapValue"].ToString()), double.Parse(reader["AcquisitionValue"].ToString()), Convert.ToDateTime(reader["LifeTime"].ToString()))));
+                        _Tasks.Add(new Model.Task(reader["Description"].ToString(), Convert.ToDateTime(reader["StartTime"].ToString()), Convert.ToDateTime(reader["EndTime"].ToString()), new Model.Employee(int.Parse(reader["ID"].ToString()), Convert.ToString(reader["Password"]), Convert.ToDateTime(reader["Hired"].ToString()), reader["Name"].ToString()), new Model.Machine(reader["Name"].ToString(), int.Parse(reader["Capacity"].ToString()), int.Parse(reader["ScrapValue"].ToString()), double.Parse(reader["AcquisitionValue"].ToString()), int.Parse(reader["LifeTime"].ToString()))));
                     }
                 }
                 catch (SqlException E)
