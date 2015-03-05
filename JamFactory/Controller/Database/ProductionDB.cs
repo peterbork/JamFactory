@@ -13,8 +13,9 @@ namespace JamFactory.Controller.Database
     {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl20_db;" + "User Id=ejl20_usr;" + "Password=Baz1nga20;";
 
-        public static void CheckLogin(int PersonID, string Password)
+        public static bool CheckLogin(int PersonID, string Password)
         {
+            bool LogIn = false;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 try
@@ -24,8 +25,19 @@ namespace JamFactory.Controller.Database
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@PersonID", PersonID));
                     cmd.Parameters.Add(new SqlParameter("@Password", Password));
-                    cmd.ExecuteNonQuery(); // ExecuteNonQuery is intended for UPDATE, INSERT and DELETE queries
+                    //cmd.ExecuteNonQuery(); // ExecuteNonQuery is intended for UPDATE, INSERT and DELETE queries
 
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            LogIn = true;
+                        }
+                        else
+                        {
+                            LogIn = false;
+                        }
+                    }
                 }
                 catch (SqlException E)
                 {
@@ -37,6 +49,7 @@ namespace JamFactory.Controller.Database
                     conn.Dispose();
                 }
             }
+            return LogIn;
         }
 
         public static List<Model.Task> GetTask(int personid, DateTime starttime, DateTime endtime)
@@ -70,9 +83,9 @@ namespace JamFactory.Controller.Database
 
                 }
                 return _Tasks;
-                
+
             }
-            
+
         }
     }
 }
