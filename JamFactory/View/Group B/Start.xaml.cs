@@ -23,8 +23,7 @@ namespace JamFactory.View.Group_B {
 
         private void LogInbutton_Click(object sender, RoutedEventArgs e)
         {
-            
-
+           
             if (PersonIDTextBox.Text == null)
             {
                 System.Windows.MessageBox.Show("Person ID må ikke være tom!");
@@ -49,5 +48,6 @@ namespace JamFactory.View.Group_B {
         private void Closebutton_Click(object sender, RoutedEventArgs e) {
             this.Close();
         }
+
     }
 }
