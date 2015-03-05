@@ -65,7 +65,7 @@ namespace JamFactory.View.Group_B {
             //for each listbox in the list
             for (int i = 0; i < listBox.Count; i++) {
                 for (int j = 0; j < Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i].Count; j++) {
-                    listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].StartTime) + " - " + Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].EndTime) + "\nMaskine:\n" + Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].Machine.Name + "\nBeskrivelse: \n" + Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].Description);
+                    listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].StartTime) + " - " + Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].EndTime) + "\nMaskine:\n" + Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].Machine.Name + "\nBeskrivelse: \n" + Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].Description + "\n");
                 }
             }
         }
