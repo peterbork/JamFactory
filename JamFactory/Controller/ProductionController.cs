@@ -17,13 +17,12 @@ namespace JamFactory.Controller {
             bool LogIn = Database.ProductionDB.CheckLogin(personID, password);
 
             if (LogIn == true) {
-                
-
                 View.Group_B.ScheduleView scheduleView = new View.Group_B.ScheduleView();
                 scheduleView.Show();
-                View.Group_B.Start logInView = new View.Group_B.Start();
-                logInView.Close();
-
+                try {
+                    App.Current.Windows[0].Close();
+                }
+                catch { }
             }
             else {
                 System.Windows.MessageBox.Show("PersonID og Password er forkert!");
