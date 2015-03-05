@@ -1,7 +1,7 @@
 ﻿<Window x:Class="JamFactory.View.Group_B.ScheduleView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ScheduleView" Height="424.126" Width="1117.513">
+        Title="ScheduleView" Height="424.126" Width="1117.513" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Button x:Name="PrevWeek" Content="Tidligere uge" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Click="PrevWeek_Click"/>

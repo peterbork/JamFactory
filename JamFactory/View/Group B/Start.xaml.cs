@@ -21,8 +21,6 @@ namespace JamFactory.View.Group_B {
             InitializeComponent();
         }
 
-
-
         private void LogInbutton_Click(object sender, RoutedEventArgs e)
         {
             
@@ -44,6 +42,7 @@ namespace JamFactory.View.Group_B {
                 int PersonID = int.Parse(PersonIDTextBox.Text);
                 string Password = PasswordBox.Password;
                 Controller.ProductionController.CheckLogin(PersonID, Password);
+
             }
         }
 
