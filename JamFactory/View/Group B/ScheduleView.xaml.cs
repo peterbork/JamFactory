@@ -30,6 +30,7 @@ namespace JamFactory.View.Group_B {
         public ScheduleView() {
             InitializeComponent();
 
+            // Adds 
             listBox = new List<ListBox>();
             listBox.Add(day1);
             listBox.Add(day2);
@@ -63,11 +64,11 @@ namespace JamFactory.View.Group_B {
             FirstDateOfWeek = Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
 
             LastDateOfWeek = Dates.LastDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
-
+            Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber);
             //for each listbox in the list
             for (int i = 0; i < listBox.Count; i++) {
-                for (int j = 0; j < Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i].Count; j++) {
-                    listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].StartTime) + " - " + Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].EndTime) + "\nMaskine:\n" + Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].Machine.Name + "\nBeskrivelse: \n" + Controller.ProductionController.GetTask(2, FirstDateOfWeek, LastDateOfWeek, WeekNumber)[i][j].Description + "\n");
+                for (int j = 0; j < Controller.ProductionController.ListOfLists[i].Count; j++) {
+                    listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].StartTime) + " - " + Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].EndTime) + "\nMaskine:\n" + Controller.ProductionController.ListOfLists[i][j].Machine.Name + "\nBeskrivelse: \n" + Controller.ProductionController.ListOfLists[i][j].Description + "\n");
                 }
             }
         }
@@ -77,4 +78,4 @@ namespace JamFactory.View.Group_B {
             }
         }
     }
-}
+}               

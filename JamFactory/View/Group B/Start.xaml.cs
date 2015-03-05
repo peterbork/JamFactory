@@ -38,10 +38,15 @@ namespace JamFactory.View.Group_B {
             }
             else
             {
-                int PersonID = int.Parse(PersonIDTextBox.Text);
-                string Password = PasswordBox.Password;
-                Controller.ProductionController.CheckLogin(PersonID, Password);
-
+                int i = 0;
+                if (int.TryParse(PersonIDTextBox.Text, out i)) {
+                    int PersonID = int.Parse(PersonIDTextBox.Text);
+                    string Password = PasswordBox.Password;
+                    Controller.ProductionController.CheckLogin(PersonID, Password);
+                }
+                else {
+                    System.Windows.MessageBox.Show("Person ID skal være et tal");
+                }
             }
         }
 

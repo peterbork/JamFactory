@@ -54,6 +54,7 @@ namespace JamFactory.Controller.Database
 
         public static List<Model.Task> GetTask(int personid, DateTime starttime, DateTime endtime)
         {
+            // Gets all tasks within the parameters
             List<Model.Task> _Tasks = new List<Model.Task>();
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
