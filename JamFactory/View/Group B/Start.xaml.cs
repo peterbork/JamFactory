@@ -19,7 +19,6 @@ namespace JamFactory.View.Group_B {
     public partial class Start : Window {
         public Start() {
             InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -31,8 +30,23 @@ namespace JamFactory.View.Group_B {
         {
             int PersonID = int.Parse(PersonIDTextBox.Text);
             string Password = PasswordBox.Password;
-            
-            Controller.ProductionController.CheckLogin(PersonID, Password);
+
+            if (PersonID == null)
+            {
+                System.Windows.MessageBox.Show("Person ID må ikke være tom!");
+            }
+            else if (Password == null)
+            {
+                System.Windows.MessageBox.Show("Password må ikke være tom!");
+            }
+            else if (PersonID == null && Password == null)
+            {
+                System.Windows.MessageBox.Show("Person ID og Password må ikke være tom!");
+            }
+            else
+            {
+                Controller.ProductionController.CheckLogin(PersonID, Password);
+            }
         }
 
         private void Closebutton_Click(object sender, RoutedEventArgs e) {
