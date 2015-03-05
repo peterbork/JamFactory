@@ -35,5 +35,8 @@ namespace JamFactory.Helper {
             }
             return firstWeekDay.AddDays((weekOfYear * 7) + 6);
         }
+        public static string GetHoursFromDateTime(DateTime datetime) {
+            return String.Format("{0:HH:mm}", datetime);
+        }
     }
 }
