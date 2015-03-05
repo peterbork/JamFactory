@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Globalization;
 using JamFactory.Helper;
 using JamFactory.Model;
+using JamFactory.Controller;
 
 
 namespace JamFactory.View.Group_B {
@@ -41,21 +42,22 @@ namespace JamFactory.View.Group_B {
             DateTime Today = DateTime.Now;
             WeekNumber = Dates.GetWeekNumberFromDate(Today);
             SelectedWeek.Content = "Week " + WeekNumber;
-            FillSchedule(2, WeekNumber, listBox);
+            FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
+            
         }
 
         private void NextWeek1_Click(object sender, RoutedEventArgs e) {
             WeekNumber++;
             SelectedWeek.Content = "Week " + WeekNumber;
             EmptySchedule();
-            FillSchedule(2, WeekNumber, listBox);
+            FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
         }
 
         private void PrevWeek_Click(object sender, RoutedEventArgs e) {
             WeekNumber--;
             SelectedWeek.Content = "Week " + WeekNumber;
             EmptySchedule();
-            FillSchedule(2, WeekNumber, listBox);
+            FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
         }
         private void FillSchedule(int EmployeeID, int WeekNumber, List<ListBox> listBox) {
             FirstDateOfWeek = Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
