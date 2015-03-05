@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Start" Height="362.177" Width="348.32" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Log In" FontSize="30px" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="PersonID" FontSize="15px" HorizontalAlignment="Left" Margin="131,86,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password" FontSize="15px" HorizontalAlignment="Left" Margin="131,164,0,0" VerticalAlignment="Top"/>
+        <Label Content="Log Ind" FontSize="30px" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="PersonID" FontSize="15px" HorizontalAlignment="Left" Margin="131,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="Adgangskode" FontSize="15px" HorizontalAlignment="Left" Margin="119,164,0,0" VerticalAlignment="Top"/>
         <TextBox Name="PersonIDTextBox" HorizontalAlignment="Left" Height="23" Margin="110,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <PasswordBox Name="PasswordBox" HorizontalAlignment="Left" Margin="110,194,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
-        <Button Name="LogInbutton" Content="Log In" HorizontalAlignment="Left" Margin="70,254,0,0" VerticalAlignment="Top" Width="75" Click="LogInbutton_Click"/>
-        <Button Name="Closebutton" Content="Close" HorizontalAlignment="Left" Margin="192,254,0,0" VerticalAlignment="Top" Width="75" Click="Closebutton_Click"/>
+        <Button Name="LogInbutton" Content="Log Ind" HorizontalAlignment="Left" Margin="70,254,0,0" VerticalAlignment="Top" Width="75" Click="LogInbutton_Click"/>
+        <Button Name="Closebutton" Content="Luk" HorizontalAlignment="Left" Margin="192,254,0,0" VerticalAlignment="Top" Width="75" Click="Closebutton_Click"/>
     </Grid>
 </Window>
