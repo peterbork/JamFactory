@@ -54,5 +54,21 @@ namespace JamFactory.View.Group_B {
             this.Close();
         }
 
+        private void PersonIDTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PasswordBox.Focus();
+            }
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LogInbutton_Click(null, null);
+            }
+        }
+
     }
 }
