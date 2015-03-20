@@ -11,7 +11,9 @@ namespace JamFactory.Controller {
 
     public class ProductionController {
         static int EmployeeID;
+        static DateTime currentDate = DateTime.Now;
         public static List<List<Model.Task>> ListOfLists;
+
         public static void CheckLogin(int personID, string password)
         {
             EmployeeID = personID;
@@ -41,13 +43,13 @@ namespace JamFactory.Controller {
             DateTime StartOfWeekDate = Helper.Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
 
             // Adds list of tasks to the list of lists
-            List<List<Model.Task>> ListOfTasksInList  = GetTaskForEachDay(_Tasks, StartOfWeekDate);
+            List<List<Model.Task>> ListOfTasksInList  = GetTasksForEachDay(_Tasks, StartOfWeekDate);
 
             // Returns a list within a list of all tasks;
             ListOfLists = ListOfTasksInList;
         }
 
-        public static List<List<Model.Task>> GetTaskForEachDay( List<Model.Task> _Tasks, DateTime StartOfWeekDate){
+        public static List<List<Model.Task>> GetTasksForEachDay( List<Model.Task> _Tasks, DateTime StartOfWeekDate){
             // Creates new list with lists
             List<List<Model.Task>> ListOfTaskInList = new List<List<Model.Task>>();
             
@@ -58,15 +60,15 @@ namespace JamFactory.Controller {
             for (int i = 1; i <= 7; i++)
 			{
                 // Create new list of Tasks
-                List<Model.Task> ListOfTask = new List<Model.Task>();
+                List<Model.Task> ListOfTasks = new List<Model.Task>();
                 foreach (Model.Task t in _Tasks) 
                 {
                     if (t.StartTime > MondayDate && t.EndTime < MondayDate.AddDays(1)) 
                     {
-                        ListOfTask.Add(t);
+                        ListOfTasks.Add(t);
                     }
                 }
-            ListOfTaskInList.Add(ListOfTask);
+            ListOfTaskInList.Add(ListOfTasks);
 
             // Add 1 day for every loop through
             MondayDate = StartOfWeekDate.AddDays(i);
