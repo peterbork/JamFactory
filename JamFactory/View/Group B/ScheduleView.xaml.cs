@@ -42,21 +42,21 @@ namespace JamFactory.View.Group_B {
 
             DateTime Today = DateTime.Now;
             WeekNumber = Dates.GetWeekNumberFromDate(Today);
-            SelectedWeek.Content = "Week " + WeekNumber;
+            SelectedWeek.Content = "Uge " + WeekNumber;
             FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
             
         }
 
         private void NextWeek1_Click(object sender, RoutedEventArgs e) {
             WeekNumber++;
-            SelectedWeek.Content = "Week " + WeekNumber;
+            SelectedWeek.Content = "Uge " + WeekNumber;
             EmptySchedule();
             FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
         }
 
         private void PrevWeek_Click(object sender, RoutedEventArgs e) {
             WeekNumber--;
-            SelectedWeek.Content = "Week " + WeekNumber;
+            SelectedWeek.Content = "Uge " + WeekNumber;
             EmptySchedule();
             FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
         }
