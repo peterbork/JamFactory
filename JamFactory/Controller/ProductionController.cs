@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JamFactory.Model;
 using System.Globalization;
+using System.Windows;
 
 // Controller for group B
 namespace JamFactory.Controller {
@@ -34,13 +35,40 @@ namespace JamFactory.Controller {
             return EmployeeID;
         }
 
+        public static int GetCurrentYear() {
+            return currentDate.Year;
+        }
+
+        public static int GetWeekNumber() {
+            return Helper.Dates.GetWeekNumberFromDate(currentDate);
+        }
+
+        public static void JumpToWeek(int week) {
+            if (Helper.Dates.ValidWeekNumber(week, currentDate.Year)) {
+                currentDate = Helper.Dates.FirstDateOfWeek(week, currentDate.Year);
+            }
+            else {
+                MessageBox.Show("Ikke en gyldig uge");
+            }
+        }
+
+        public static int JumpToNextWeek() {
+            currentDate = currentDate.AddDays(7);
+            return Helper.Dates.GetWeekNumberFromDate(currentDate);
+        }
+
+        public static int JumpToPreviousWeek() {
+            currentDate = currentDate.AddDays(-7);
+            return Helper.Dates.GetWeekNumberFromDate(currentDate);
+        }
+
         public static void GetTasks(int EmployeeID, DateTime starttime, DateTime endtime, int WeekNumber) {
 
             // Gets all tasks within the given parameters (EmployeeID, StartTime, EndTime)
             List<Model.Task> _Tasks = Database.ProductionDB.GetTasks(EmployeeID, starttime, endtime);
 
             // Uses helper class to find first date from weeknumber
-            DateTime StartOfWeekDate = Helper.Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
+            DateTime StartOfWeekDate = Helper.Dates.FirstDateOfWeek(WeekNumber);
 
             // Adds list of tasks to the list of lists
             List<List<Model.Task>> ListOfTasksInList  = GetTasksForEachDay(_Tasks, StartOfWeekDate);

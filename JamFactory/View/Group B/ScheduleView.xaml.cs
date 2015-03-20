@@ -38,26 +38,25 @@ namespace JamFactory.View.Group_B {
             listBox.Add(day6);
             listBox.Add(day7);
 
-            DateTime Today = DateTime.Now;
-            WeekNumber = Dates.GetWeekNumberFromDate(Today);
+            WeekNumber = ProductionController.GetWeekNumber();
             FillSchedule();
             
         }
 
         private void NextWeek1_Click(object sender, RoutedEventArgs e) {
-            WeekNumber++;
+            WeekNumber = ProductionController.JumpToNextWeek();
             FillSchedule();
         }
 
         private void PrevWeek_Click(object sender, RoutedEventArgs e) {
-            WeekNumber--;
+            WeekNumber = ProductionController.JumpToPreviousWeek();
             FillSchedule();
         }
         private void FillSchedule() {
             int EmployeeID = ProductionController.GetEmployeeID();
 
-            DateTime FirstDateOfWeek = Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
-            DateTime LastDateOfWeek = Dates.LastDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
+            DateTime FirstDateOfWeek = Dates.FirstDateOfWeek(WeekNumber);
+            DateTime LastDateOfWeek = Dates.LastDateOfWeek(WeekNumber);
 
             Controller.ProductionController.GetTasks(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber);
             //for each listbox in the list
@@ -68,7 +67,21 @@ namespace JamFactory.View.Group_B {
                 }
             }
 
-            SelectedWeek.Content = "Uge " + WeekNumber;
+            WeekNumberInput.Text = WeekNumber + "";
+            Year.Content = ProductionController.GetCurrentYear();
+        }
+
+        private void WeekNumberInput_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Enter) {
+                try {
+                    WeekNumber = int.Parse(WeekNumberInput.Text);
+                }catch (FormatException error) {
+                    MessageBox.Show("Skal være et tal");
+                }
+
+                ProductionController.JumpToWeek(WeekNumber);
+                FillSchedule();
+            }
         }
     }
 }               
