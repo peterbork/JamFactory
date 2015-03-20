@@ -52,7 +52,7 @@ namespace JamFactory.Controller.Database
             return LogIn;
         }
 
-        public static List<Model.Task> GetTask(int personid, DateTime starttime, DateTime endtime)
+        public static List<Model.Task> GetTasks(int personid, DateTime starttime, DateTime endtime)
         {
             // Gets all tasks within the parameters
             List<Model.Task> _Tasks = new List<Model.Task>();

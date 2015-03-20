@@ -32,19 +32,19 @@ namespace JamFactory.Controller {
             return EmployeeID;
         }
 
-        public static void GetTask(int EmployeeID, DateTime starttime, DateTime endtime, int WeekNumber) {
+        public static void GetTasks(int EmployeeID, DateTime starttime, DateTime endtime, int WeekNumber) {
 
             // Gets all tasks within the given parameters (EmployeeID, StartTime, EndTime)
-            List<Model.Task> _Task = Database.ProductionDB.GetTask(EmployeeID, starttime, endtime);
+            List<Model.Task> _Tasks = Database.ProductionDB.GetTasks(EmployeeID, starttime, endtime);
 
             // Uses helper class to find first date from weeknumber
             DateTime StartOfWeekDate = Helper.Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
 
             // Adds list of tasks to the list of lists
-            List<List<Model.Task>> ListOfTaskInList  = GetTaskForEachDay(_Task, StartOfWeekDate);
+            List<List<Model.Task>> ListOfTasksInList  = GetTaskForEachDay(_Tasks, StartOfWeekDate);
 
             // Returns a list within a list of all tasks;
-            ListOfLists = ListOfTaskInList;
+            ListOfLists = ListOfTasksInList;
         }
 
         public static List<List<Model.Task>> GetTaskForEachDay( List<Model.Task> _Tasks, DateTime StartOfWeekDate){

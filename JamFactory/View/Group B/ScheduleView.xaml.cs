@@ -23,8 +23,6 @@ namespace JamFactory.View.Group_B {
     /// </summary>
     public partial class ScheduleView : Window {
         int WeekNumber;
-        DateTime FirstDateOfWeek;
-        DateTime LastDateOfWeek;
         List<ListBox> listBox;
 
         public ScheduleView() {
@@ -42,40 +40,35 @@ namespace JamFactory.View.Group_B {
 
             DateTime Today = DateTime.Now;
             WeekNumber = Dates.GetWeekNumberFromDate(Today);
-            SelectedWeek.Content = "Uge " + WeekNumber;
-            FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
+            FillSchedule();
             
         }
 
         private void NextWeek1_Click(object sender, RoutedEventArgs e) {
             WeekNumber++;
-            SelectedWeek.Content = "Uge " + WeekNumber;
-            EmptySchedule();
-            FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
+            FillSchedule();
         }
 
         private void PrevWeek_Click(object sender, RoutedEventArgs e) {
             WeekNumber--;
-            SelectedWeek.Content = "Uge " + WeekNumber;
-            EmptySchedule();
-            FillSchedule(ProductionController.GetEmployeeID(), WeekNumber, listBox);
+            FillSchedule();
         }
-        private void FillSchedule(int EmployeeID, int WeekNumber, List<ListBox> listBox) {
-            FirstDateOfWeek = Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
+        private void FillSchedule() {
+            int EmployeeID = ProductionController.GetEmployeeID();
 
-            LastDateOfWeek = Dates.LastDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
-            Controller.ProductionController.GetTask(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber);
+            DateTime FirstDateOfWeek = Dates.FirstDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
+            DateTime LastDateOfWeek = Dates.LastDateOfWeek(WeekNumber, CultureInfo.CurrentCulture);
+
+            Controller.ProductionController.GetTasks(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber);
             //for each listbox in the list
             for (int i = 0; i < listBox.Count; i++) {
+                listBox[i].Items.Clear();
                 for (int j = 0; j < Controller.ProductionController.ListOfLists[i].Count; j++) {
                     listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].StartTime) + " - " + Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].EndTime) + "\nMaskine:\n" + Controller.ProductionController.ListOfLists[i][j].Machine.Name + "\nBeskrivelse: \n" + Controller.ProductionController.ListOfLists[i][j].Description + "\n");
                 }
             }
-        }
-        private void EmptySchedule() {
-            foreach (ListBox lb in listBox) {
-                lb.Items.Clear();
-            }
+
+            SelectedWeek.Content = "Uge " + WeekNumber;
         }
     }
 }               
