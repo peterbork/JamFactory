@@ -36,7 +36,10 @@ namespace JamFactory.Controller {
         }
 
         public static string GetCurrentYear() {
-            return currentDate.Year + "";
+            if (currentDate.Year != currentDate.AddDays(5).Year)
+                return currentDate.Year + "/" + currentDate.AddDays(5).Year;
+            else
+                return currentDate.Year + "";
         }
 
         public static int GetWeekNumber() {
