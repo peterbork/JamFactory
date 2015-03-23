@@ -25,9 +25,9 @@
         <Label Content="Lørdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324.597,55,0,0" Grid.Column="1"/>
         <Label Content="Søndag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="469.597,55,0,0" Grid.Column="1"/>
         <Rectangle Fill="#CCCCCC" HorizontalAlignment="Left" Height="1" Margin="10,47,0,0" Stroke="Gray" VerticalAlignment="Top" Width="1081" Grid.ColumnSpan="2"/>
-        <TextBox Name="WeekNumberInput" HorizontalAlignment="Left" Height="23" Margin="49.597,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0" Grid.Column="1" KeyDown="WeekNumberInput_KeyDown"/>
-        <Label x:Name="SelectedWeek" Content="Uge" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,10,539,0" Width="36" Grid.Column="1"/>
-        <Label x:Name="Year" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="20,22,0,0" VerticalAlignment="Top" Width="76" HorizontalContentAlignment="Center"/>
+        <TextBox Name="WeekNumberInput" HorizontalAlignment="Left" Height="23" Margin="50,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0" Grid.Column="1" KeyDown="WeekNumberInput_KeyDown"/>
+        <Label x:Name="SelectedWeek" Content="Uge" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,9,539,0" Width="36" Grid.Column="1"/>
+        <Label x:Name="Year" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="17,22,0,0" VerticalAlignment="Top" Width="79" HorizontalContentAlignment="Center"/>
         <Button Name="Logout" Content="Log ud" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="501,385,0,0" Click="Logout_Click"/>
         <Button Name="Print" Content="Print" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="407,385,0,0" RenderTransformOrigin="0.463,0.448" Click="Print_Click"/>
 
