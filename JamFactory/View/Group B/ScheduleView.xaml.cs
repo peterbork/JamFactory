@@ -59,6 +59,13 @@ namespace JamFactory.View.Group_B {
             DateTime LastDateOfWeek = Dates.LastDateOfWeek(WeekNumber);
 
             Controller.ProductionController.GetTasks(EmployeeID, FirstDateOfWeek, LastDateOfWeek, WeekNumber);
+            Mondaylabel.Content = "Mandag: " + FirstDateOfWeek.Day + "/" + FirstDateOfWeek.Month;
+            Tuesdaylabel.Content = "Tirsdag: " + FirstDateOfWeek.AddDays(1).Day + "/" + FirstDateOfWeek.AddDays(1).Month;
+            Wednesdaylabel.Content = "Onsdag: " + FirstDateOfWeek.AddDays(2).Day + "/" + FirstDateOfWeek.AddDays(2).Month;
+            Thursdaylabel.Content = "Torsdag: " + FirstDateOfWeek.AddDays(3).Day + "/" + FirstDateOfWeek.AddDays(2).Month;
+            Fridaylabel.Content = "Fredag: " + FirstDateOfWeek.AddDays(4).Day + "/" + FirstDateOfWeek.AddDays(2).Month;
+            Saturdaylabel.Content = "Lørdag: " + FirstDateOfWeek.AddDays(5).Day + "/" + FirstDateOfWeek.AddDays(2).Month;
+            Sundaylabel.Content = "Søndag: " + LastDateOfWeek.Day + "/" + LastDateOfWeek.Month;
             //for each listbox in the list
             for (int i = 0; i < listBox.Count; i++) {
                 listBox[i].Items.Clear();

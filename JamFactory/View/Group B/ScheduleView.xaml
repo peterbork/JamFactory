@@ -10,20 +10,20 @@
 
         <Button x:Name="PrevWeek" Content="Tidligere uge" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Click="PrevWeek_Click"/>
         <Button x:Name="NextWeek1" Content="Næste uge" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="500.597,10,0,0" Click="NextWeek1_Click" Grid.Column="1"/>
-        <ListBox x:Name="day1" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="10,88,0,0"/>
-        <ListBox x:Name="day2" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="165,88,0,0"/>
-        <ListBox x:Name="day3" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="321,88,0,0"/>
-        <ListBox x:Name="day4" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="476,88,0,0" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="day5" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="115.597,88,0,0" Grid.Column="1"/>
+        <ListBox x:Name="day1" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="150" Margin="10,86,0,0"/>
+        <ListBox x:Name="day2" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="150" Margin="165,86,0,0"/>
+        <ListBox x:Name="day3" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="150" Margin="321,86,0,0"/>
+        <ListBox x:Name="day4" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="150" Margin="476,86,0,0" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="day5" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="150" Margin="116,86,0,0" Grid.Column="1"/>
         <ListBox x:Name="day6" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="270.597,86,0,0" Grid.Column="1"/>
         <ListBox x:Name="day7" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="150" Margin="425.597,86,0,0" Grid.Column="1"/>
-        <Label Content="Mandag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,56,0,0"/>
-        <Label Content="Tirsdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="216,56,0,0"/>
-        <Label Content="Onsdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="373,56,0,0"/>
-        <Label Content="Torsdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9.597,55,0,0" Grid.Column="1"/>
-        <Label Content="Fredag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="169.597,56,0,0" Grid.Column="1"/>
-        <Label Content="Lørdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324.597,55,0,0" Grid.Column="1"/>
-        <Label Content="Søndag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="469.597,55,0,0" Grid.Column="1"/>
+        <Label Name="Mondaylabel" Content="Mandag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,56,0,0" Width="97"/>
+        <Label Name="Tuesdaylabel" Content="Tirsdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,56,0,0" Width="94"/>
+        <Label Name="Wednesdaylabel" Content="Onsdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="345,56,0,0" Width="98"/>
+        <Label Name="Thursdaylabel" Content="Torsdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,55,0,0" Grid.ColumnSpan="2" Width="98"/>
+        <Label Name="Fridaylabel" Content="Fredag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,56,0,0" Grid.Column="1" Width="105"/>
+        <Label Name="Saturdaylabel" Content="Lørdag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="294,55,0,0" Grid.Column="1" Width="101"/>
+        <Label Name="Sundaylabel" Content="Søndag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="447,55,0,0" Grid.Column="1" Width="101"/>
         <Rectangle Fill="#CCCCCC" HorizontalAlignment="Left" Height="1" Margin="10,47,0,0" Stroke="Gray" VerticalAlignment="Top" Width="1081" Grid.ColumnSpan="2"/>
         <TextBox Name="WeekNumberInput" HorizontalAlignment="Left" Height="23" Margin="50,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0" Grid.Column="1" KeyDown="WeekNumberInput_KeyDown"/>
         <Label x:Name="SelectedWeek" Content="Uge" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,9,539,0" Width="36" Grid.Column="1"/>
