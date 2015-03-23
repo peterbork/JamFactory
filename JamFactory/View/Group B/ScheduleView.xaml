@@ -1,8 +1,8 @@
 ﻿<Window x:Class="JamFactory.View.Group_B.ScheduleView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ScheduleView" Height="424.126" Width="1117.513" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="ScheduleView" Height="443.529" Width="1117.513" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,-3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="103*"/>
             <ColumnDefinition Width="119*"/>
@@ -27,7 +27,8 @@
         <Rectangle Fill="#CCCCCC" HorizontalAlignment="Left" Height="1" Margin="10,47,0,0" Stroke="Gray" VerticalAlignment="Top" Width="1081" Grid.ColumnSpan="2"/>
         <TextBox Name="WeekNumberInput" HorizontalAlignment="Left" Height="23" Margin="49.597,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0" Grid.Column="1" KeyDown="WeekNumberInput_KeyDown"/>
         <Label x:Name="SelectedWeek" Content="Uge" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,10,539,0" Width="36" Grid.Column="1"/>
-        <Label x:Name="Year" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="39,27,0,0" VerticalAlignment="Top" Width="45"/>
+        <Label x:Name="Year" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="20,22,0,0" VerticalAlignment="Top" Width="76" HorizontalContentAlignment="Center"/>
+        <Button Name="Logout" Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="501,385,0,0" Click="Logout_Click"/>
 
     </Grid>
 </Window>

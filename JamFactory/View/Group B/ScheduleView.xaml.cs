@@ -83,5 +83,12 @@ namespace JamFactory.View.Group_B {
                 FillSchedule();
             }
         }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            Start S = new Start();
+            S.Show();
+            Close();
+        }
     }
 }               
