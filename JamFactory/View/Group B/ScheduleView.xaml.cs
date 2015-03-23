@@ -90,5 +90,10 @@ namespace JamFactory.View.Group_B {
             S.Show();
             Close();
         }
+
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Arbejdsplan sendt til printer.");
+        }
     }
 }               
