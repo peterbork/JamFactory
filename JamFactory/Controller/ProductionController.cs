@@ -12,7 +12,7 @@ namespace JamFactory.Controller {
 
     public class ProductionController {
         static int EmployeeID;
-        static DateTime currentDate = DateTime.Now;
+        static DateTime currentDate;
         public static List<List<Model.Task>> ListOfLists;
 
         public static void CheckLogin(int personID, string password)
@@ -43,6 +43,12 @@ namespace JamFactory.Controller {
         }
 
         public static int GetWeekNumber() {
+            if (currentDate == DateTime.MinValue) {
+                System.Globalization.CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
+                DayOfWeek fdow = ci.DateTimeFormat.FirstDayOfWeek;
+                DayOfWeek today = DateTime.Now.DayOfWeek;
+                currentDate = DateTime.Now.AddDays(-(today - fdow)).Date;
+            }
             return Helper.Dates.GetWeekNumberFromDate(currentDate);
         }
 
