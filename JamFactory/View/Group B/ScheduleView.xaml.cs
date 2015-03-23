@@ -75,7 +75,7 @@ namespace JamFactory.View.Group_B {
             if (e.Key == Key.Enter) {
                 try {
                     WeekNumber = int.Parse(WeekNumberInput.Text);
-                }catch (FormatException error) {
+                }catch (FormatException) {
                     MessageBox.Show("Skal være et tal");
                 }
 

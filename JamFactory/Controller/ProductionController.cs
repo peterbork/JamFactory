@@ -35,8 +35,8 @@ namespace JamFactory.Controller {
             return EmployeeID;
         }
 
-        public static int GetCurrentYear() {
-            return currentDate.Year;
+        public static string GetCurrentYear() {
+            return currentDate.Year + "";
         }
 
         public static int GetWeekNumber() {
