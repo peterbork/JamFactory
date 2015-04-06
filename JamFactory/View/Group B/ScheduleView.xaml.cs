@@ -70,7 +70,10 @@ namespace JamFactory.View.Group_B {
             for (int i = 0; i < listBox.Count; i++) {
                 listBox[i].Items.Clear();
                 for (int j = 0; j < Controller.ProductionController.ListOfLists[i].Count; j++) {
-                    listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].StartTime) + " - " + Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].EndTime) + "\nMaskine:\n" + Controller.ProductionController.ListOfLists[i][j].Machine.Name + "\nBeskrivelse: \n" + Controller.ProductionController.ListOfLists[i][j].Description + "\n");
+                    listBox[i].Items.Add(Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].StartTime) + " - " + 
+                                                                           Helper.Dates.GetHoursFromDateTime(Controller.ProductionController.ListOfLists[i][j].EndTime) + "\nMaskine:\n" + 
+                                                                                                             Controller.ProductionController.ListOfLists[i][j].Machine.Name + "\nBeskrivelse: \n" + 
+                                                                                                             Controller.ProductionController.ListOfLists[i][j].WorkTask.Description + "\n");
                 }
             }
 

@@ -92,6 +92,7 @@
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\ProductionController.cs" />
     <Compile Include="Helper\Dates.cs" />
+    <Compile Include="Model\TaskType.cs" />
     <Compile Include="View\Group B\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>

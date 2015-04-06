@@ -70,7 +70,14 @@ namespace JamFactory.Controller.Database
 
                     while (reader.Read())
                     {
-                        _Tasks.Add(new Model.Task(reader["Description"].ToString(), Convert.ToDateTime(reader["StartTime"].ToString()), Convert.ToDateTime(reader["EndTime"].ToString()), new Model.Employee(int.Parse(reader["ID"].ToString()), Convert.ToString(reader["Password"]), Convert.ToDateTime(reader["Hired"].ToString()), reader["Name"].ToString()), new Model.Machine(reader["Name"].ToString(), int.Parse(reader["Capacity"].ToString()), int.Parse(reader["ScrapValue"].ToString()), double.Parse(reader["AcquisitionValue"].ToString()), int.Parse(reader["LifeTime"].ToString()))));
+                        _Tasks.Add(new Model.Task(new Model.TaskType(reader["Description"].ToString(),
+                                                                     Convert.ToInt32(reader["TaskTypeID"])), 
+                                                  Convert.ToDateTime(reader["StartTime"].ToString()), 
+                                                  Convert.ToDateTime(reader["EndTime"].ToString()), 
+                                                  new Model.Employee(int.Parse(reader["ID"].ToString()), 
+                                                                     Convert.ToString(reader["Password"]), 
+                                                                     Convert.ToDateTime(reader["Hired"].ToString()), 
+                                                                     reader["Name"].ToString()) ));
                     }
                 }
                 catch (SqlException E)
@@ -87,6 +94,35 @@ namespace JamFactory.Controller.Database
 
             }
 
+        }
+        public static void AddTask(List<Model.Task> schedule)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    foreach (Model.Task task in schedule)
+                    {
+                        SqlCommand cmd = new SqlCommand("2_AddTask", conn);
+                        conn.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@EmployeeID", task.Employee.ID));
+                        cmd.Parameters.Add(new SqlParameter("@StartTime", task.StartTime));
+                        cmd.Parameters.Add(new SqlParameter("@EndTime", task.EndTime));
+                        cmd.Parameters.Add(new SqlParameter("@TaskTypeID", task.WorkTask.ID));
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException E)
+                {
+                    System.Windows.MessageBox.Show(E.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
         }
     }
 }
