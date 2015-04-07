@@ -70,14 +70,21 @@ namespace JamFactory.Controller.Database
 
                     while (reader.Read())
                     {
-                        _Tasks.Add(new Model.Task(new Model.TaskType(reader["Description"].ToString(),
+                        _Tasks.Add(new Model.Task(new Model.Machine(Convert.ToInt32(reader["MachineID"]),
+                                                                    reader["Name"].ToString(), 
+                                                                    Convert.ToInt32(reader["Capacity"]), 
+                                                                    Convert.ToDouble(reader["ScrapValue"]), 
+                                                                    Convert.ToDouble(reader["AuquistionValue"]), 
+                                                                    Convert.ToInt32(reader["LifeTime"])),
+                                                  new Model.TaskType(reader["Description"].ToString(),
                                                                      Convert.ToInt32(reader["TaskTypeID"])), 
                                                   Convert.ToDateTime(reader["StartTime"].ToString()), 
                                                   Convert.ToDateTime(reader["EndTime"].ToString()), 
                                                   new Model.Employee(int.Parse(reader["ID"].ToString()), 
                                                                      Convert.ToString(reader["Password"]), 
                                                                      Convert.ToDateTime(reader["Hired"].ToString()), 
-                                                                     reader["Name"].ToString()) ));
+                                                                     reader["Name"].ToString(),
+                                                                     reader["WorkShift"].ToString())));
                     }
                 }
                 catch (SqlException E)
@@ -101,15 +108,17 @@ namespace JamFactory.Controller.Database
             {
                 try
                 {
+                    conn.Open();
                     foreach (Model.Task task in schedule)
                     {
+                        
                         SqlCommand cmd = new SqlCommand("2_AddTask", conn);
-                        conn.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add(new SqlParameter("@EmployeeID", task.Employee.ID));
                         cmd.Parameters.Add(new SqlParameter("@StartTime", task.StartTime));
                         cmd.Parameters.Add(new SqlParameter("@EndTime", task.EndTime));
                         cmd.Parameters.Add(new SqlParameter("@TaskTypeID", task.WorkTask.ID));
+                        cmd.Parameters.Add(new SqlParameter("@MachineID", task.Machine.MachineID));
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -122,6 +131,108 @@ namespace JamFactory.Controller.Database
                     conn.Close();
                     conn.Dispose();
                 }
+            }
+        }
+        public static List<Model.Employee> GetEmployees(int employeeId)
+        {
+            List<Model.Employee> employees = new List<Model.Employee>();
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("3_GetEmployeeFromPersonID", conn);
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@PersonID", employeeId));
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        employees.Add(new Model.Employee(int.Parse(reader["ID"].ToString()), 
+                                                                   Convert.ToString(reader["Password"]), 
+                                                                   Convert.ToDateTime(reader["Hired"].ToString()), 
+                                                                   reader["Name"].ToString(),
+                                                                   reader["WorkShift"].ToString()));
+                    }
+                }
+                catch (SqlException E)
+                {
+                    System.Windows.MessageBox.Show(E.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+                return employees;
+            }
+        }
+        public static List<Model.TaskType> GetTaskTypes(int taskTypeId)
+        {
+            // Gets all tasks within the parameters
+            List<Model.TaskType> taskTypes = new List<Model.TaskType>();
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("GetTaskType", conn);
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@ID", taskTypeId));
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        taskTypes.Add(new Model.TaskType(reader["Description"].ToString(),
+                                                         Convert.ToInt32(reader["ID"])));                             
+                    }
+                }
+                catch (SqlException E)
+                {
+                    System.Windows.MessageBox.Show(E.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+                return taskTypes;
+            }
+        }
+        public static List<Model.Machine> GetMachines(int machineId)
+        {
+            List<Model.Machine> machines = new List<Model.Machine>();
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("GetMachine", conn);
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@ID", machineId));
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        machines.Add(new Model.Machine(Convert.ToInt32(reader["ID"]),
+                                                       reader["Name"].ToString(),
+                                                       Convert.ToInt32(reader["Capacity"]),
+                                                       Convert.ToDouble(reader["ScrapValue"]),
+                                                       Convert.ToDouble(reader["AcquisitionValue"]),
+                                                       Convert.ToInt32(reader["LifeTime"])));
+                    }
+                }
+                catch (SqlException E)
+                {
+                    System.Windows.MessageBox.Show(E.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+
+                }
+                return machines;
             }
         }
     }

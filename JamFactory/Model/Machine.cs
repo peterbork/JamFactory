@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace JamFactory.Model {
     public class Machine {
+        public int MachineID { get; set; }
         public string Name { get; set; }
         public int Capacity { get; set; }
         public double ScrapValue { get; set; }
         public double AuquistionValue { get; set; }
         public int LifeTime { get; set; }
-        public Machine(string name, int capacity, double scrapvalue, double auquistionvalue, int lifetime) {
+        public Machine(int ID, string name, int capacity, double scrapvalue, double auquistionvalue, int lifetime) {
+            this.MachineID = ID;
             this.Name = name;
             this.Capacity = capacity;
             this.ScrapValue = scrapvalue;

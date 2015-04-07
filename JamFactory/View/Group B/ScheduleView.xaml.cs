@@ -105,5 +105,11 @@ namespace JamFactory.View.Group_B {
         {
             MessageBox.Show("Arbejdsplan sendt til printer.");
         }
+
+        private void MakeSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            Controller.ProductionController Pcntl = new ProductionController();
+            Pcntl.MakeSchedule(WeekNumber);
+        }
     }
 }               
