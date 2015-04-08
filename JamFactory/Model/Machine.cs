@@ -10,14 +10,15 @@ namespace JamFactory.Model {
         public string Name { get; set; }
         public int Capacity { get; set; }
         public double ScrapValue { get; set; }
-        public double AuquistionValue { get; set; }
+        public double AcquisitionValue { get; set; }
         public int LifeTime { get; set; }
-        public Machine(int ID, string name, int capacity, double scrapvalue, double auquistionvalue, int lifetime) {
+        public Machine(int ID, string name, int capacity, double scrapvalue, double acquisitionValue, int lifetime)
+        {
             this.MachineID = ID;
             this.Name = name;
             this.Capacity = capacity;
             this.ScrapValue = scrapvalue;
-            this.AuquistionValue = auquistionvalue;
+            this.AcquisitionValue = acquisitionValue;
             this.LifeTime = lifetime;
         }
     }

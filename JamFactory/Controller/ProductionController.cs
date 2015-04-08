@@ -22,7 +22,7 @@ namespace JamFactory.Controller {
 
             if (LogIn == true) {
                 View.Group_B.ScheduleView scheduleView = new View.Group_B.ScheduleView();
-                if (password == "Admin")
+                if (EmployeeID == 77)
                 {
                     scheduleView.MakeSchedule.Visibility = Visibility.Visible;
                 }
@@ -119,7 +119,9 @@ namespace JamFactory.Controller {
         public List<Model.Task> MakeSchedule(int weekNumber)
         {
             List<Model.TaskType> taskTypes = Database.ProductionDB.GetTaskTypes(0);
-            List<Model.Employee> employees = Database.ProductionDB.GetEmployees(0);
+            List<Model.Employee> dayemployees = ShiftList("Day");
+            List<Model.Employee> eveningemployees = ShiftList("Evening");
+            List<Model.Employee> nightemployees = ShiftList("Night");
             List<Model.Machine> machines = Database.ProductionDB.GetMachines(0);
             List<DateTime> daysInWeek = new List<DateTime>();
             daysInWeek.Add(Helper.Dates.FirstDateOfWeek(weekNumber));
@@ -129,113 +131,135 @@ namespace JamFactory.Controller {
             daysInWeek.Add(Helper.Dates.FirstDateOfWeek(weekNumber).AddDays(4));
 
             List<Model.Task> Schedule = new List<Model.Task>();
+            
             foreach (DateTime date in daysInWeek)
             {
+                int dayworker = 0;
+                int eveningworker = 0;
+                int nightworker = 0;
                 foreach (Model.Machine machine in machines)
                 {
-                    for (int i = 0; i < employees.Count; i++)
-                    {
-                        foreach (Model.TaskType taskType in taskTypes)
+                    
+                    
+                        if (machine.Name.Substring(0, machine.Name.Length - 2) == "Linie")
                         {
-                            if (employees[i].WorkShift == "Day")
-                            {
-                                if (machine.Name.Substring(0, machine.Name.Length - 2) == "Linie")
+
+                                if (dayworker < dayemployees.Count - 3)
                                 {
-                                    if (taskType.Description == "Påfyldning")
-                                    {
-                                        Model.Task assign1 = new Model.Task(machine, taskType, date.AddHours(6), date.AddHours(14), employees[i]);
-                                        i++;
-                                        Model.Task assign2 = new Model.Task(machine, taskType, date.AddHours(6), date.AddHours(14), employees[i]);
-                                        i++;
-                                        Model.Task assign3 = new Model.Task(machine, taskType, date.AddHours(6), date.AddHours(14), employees[i]);
-                                        i++;
-                                        Model.Task assign4 = new Model.Task(machine, taskType, date.AddHours(6), date.AddHours(14), employees[i]);
-                                        Schedule.Add(assign1);
-                                        Schedule.Add(assign2);
-                                        Schedule.Add(assign3);
-                                        Schedule.Add(assign4);
-                                    }
-                                }
-                                if (machine.Name.Substring(0, machine.Name.Length - 2) == "Kar")
-                                {
-                                    if (taskType.Description == "Fremstilling")
-                                    {
-                                        Model.Task assign1 = new Model.Task(machine, taskType, date.AddHours(6), date.AddHours(14), employees[i]);
-                                        i++;
-                                        Model.Task assign2 = new Model.Task(machine, taskType, date.AddHours(6), date.AddHours(14), employees[i]);
-                                        Schedule.Add(assign1);
-                                        Schedule.Add(assign2);
-                                    }
-                                }
+                                    Model.Task assign1 = new Model.Task(machine, taskTypes[1], date.AddHours(6), date.AddHours(14), dayemployees[dayworker]);
+                                    dayworker++;
+                                    Model.Task assign2 = new Model.Task(machine, taskTypes[1], date.AddHours(6), date.AddHours(14), dayemployees[dayworker]);
+                                    dayworker++;
+                                    Model.Task assign3 = new Model.Task(machine, taskTypes[1], date.AddHours(6), date.AddHours(14), dayemployees[dayworker]);
+                                    dayworker++;
+                                    Model.Task assign4 = new Model.Task(machine, taskTypes[1], date.AddHours(6), date.AddHours(14), dayemployees[dayworker]);
+                                    dayworker++;
+                                    Schedule.Add(assign1);
+                                    Schedule.Add(assign2);
+                                    Schedule.Add(assign3);
+                                    Schedule.Add(assign4);
+                                
                             }
-                            if (employees[i].WorkShift == "Evening")
-                            {
-                                if (machine.Name.Substring(0, machine.Name.Length - 2) == "Linie")
+                        }
+                        if (machine.Name.Substring(0, machine.Name.Length - 2) == "Kar")
+                        {
+                                if (dayworker < dayemployees.Count - 1)
                                 {
-                                    if (taskType.Description == "Påfyldning")
-                                    {
-                                        Model.Task assign1 = new Model.Task(machine, taskType, date.AddHours(14), date.AddHours(22), employees[i]);
-                                        i++;
-                                        Model.Task assign2 = new Model.Task(machine, taskType, date.AddHours(14), date.AddHours(22), employees[i]);
-                                        i++;
-                                        Model.Task assign3 = new Model.Task(machine, taskType, date.AddHours(14), date.AddHours(22), employees[i]);
-                                        i++;
-                                        Model.Task assign4 = new Model.Task(machine, taskType, date.AddHours(14), date.AddHours(22), employees[i]);
-                                        Schedule.Add(assign1);
-                                        Schedule.Add(assign2);
-                                        Schedule.Add(assign3);
-                                        Schedule.Add(assign4);
-                                    }
+                                    Model.Task assign1 = new Model.Task(machine, taskTypes[0], date.AddHours(6), date.AddHours(14), dayemployees[dayworker]);
+                                    dayworker++;
+                                    Model.Task assign2 = new Model.Task(machine, taskTypes[0], date.AddHours(6), date.AddHours(14), dayemployees[dayworker]);
+                                    dayworker++;
+                                    Schedule.Add(assign1);
+                                    Schedule.Add(assign2);
                                 }
-                                if (machine.Name.Substring(0, machine.Name.Length - 2) == "Kar")
+                        }
+                    
+                    
+                    
+                        if (machine.Name.Substring(0, machine.Name.Length - 2) == "Linie")
+                        {
+                                if (eveningworker < eveningemployees.Count - 3)
                                 {
-                                    if (taskType.Description == "Fremstilling")
-                                    {
-                                        Model.Task assign1 = new Model.Task(machine, taskType, date.AddHours(14), date.AddHours(22), employees[i]);
-                                        i++;
-                                        Model.Task assign2 = new Model.Task(machine, taskType, date.AddHours(14), date.AddHours(22), employees[i]);
-                                        Schedule.Add(assign1);
-                                        Schedule.Add(assign2);
-                                    }
+                                    Model.Task assign1 = new Model.Task(machine, taskTypes[1], date.AddHours(14), date.AddHours(22), eveningemployees[eveningworker]);
+                                    eveningworker++;
+                                    Model.Task assign2 = new Model.Task(machine, taskTypes[1], date.AddHours(14), date.AddHours(22), eveningemployees[eveningworker]);
+                                    eveningworker++;
+                                    Model.Task assign3 = new Model.Task(machine, taskTypes[1], date.AddHours(14), date.AddHours(22), eveningemployees[eveningworker]);
+                                    eveningworker++;
+                                    Model.Task assign4 = new Model.Task(machine, taskTypes[1], date.AddHours(14), date.AddHours(22), eveningemployees[eveningworker]);
+                                    eveningworker++;
+                                    Schedule.Add(assign1);
+                                    Schedule.Add(assign2);
+                                    Schedule.Add(assign3);
+                                    Schedule.Add(assign4);
                                 }
-                            }
-                            if (employees[i].WorkShift == "Night")
-                            {
-                                if (machine.Name.Substring(0, machine.Name.Length - 2) == "Linie")
+                            
+                        }
+                        if (machine.Name.Substring(0, machine.Name.Length - 2) == "Kar")
+                        {
+
+                                if (eveningworker < eveningemployees.Count - 1)
                                 {
-                                    if (taskType.Description == "Påfyldning")
-                                    {
-                                        Model.Task assign1 = new Model.Task(machine, taskType, date.AddHours(22), date.AddHours(30), employees[i]);
-                                        i++;
-                                        Model.Task assign2 = new Model.Task(machine, taskType, date.AddHours(22), date.AddHours(30), employees[i]);
-                                        i++;
-                                        Model.Task assign3 = new Model.Task(machine, taskType, date.AddHours(22), date.AddHours(30), employees[i]);
-                                        i++;
-                                        Model.Task assign4 = new Model.Task(machine, taskType, date.AddHours(22), date.AddHours(30), employees[i]);
-                                        Schedule.Add(assign1);
-                                        Schedule.Add(assign2);
-                                        Schedule.Add(assign3);
-                                        Schedule.Add(assign4);
-                                    }
+                                    Model.Task assign1 = new Model.Task(machine, taskTypes[0], date.AddHours(14), date.AddHours(22), eveningemployees[eveningworker]);
+                                    eveningworker++;
+                                    Model.Task assign2 = new Model.Task(machine, taskTypes[0], date.AddHours(14), date.AddHours(22), eveningemployees[eveningworker]);
+                                    eveningworker++;
+                                    Schedule.Add(assign1);
+                                    Schedule.Add(assign2);
                                 }
-                                if (machine.Name.Substring(0, machine.Name.Length - 2) == "Kar")
+                            
+                        }                   
+                        if (machine.Name.Substring(0, machine.Name.Length - 2) == "Linie")
+                        {
+
+                                if (nightworker < nightemployees.Count - 3)
                                 {
-                                    if (taskType.Description == "Fremstilling")
-                                    {
-                                        Model.Task assign1 = new Model.Task(machine, taskType, date.AddHours(22), date.AddHours(30), employees[i]);
-                                        i++;
-                                        Model.Task assign2 = new Model.Task(machine, taskType, date.AddHours(22), date.AddHours(30), employees[i]);
-                                        Schedule.Add(assign1);
-                                        Schedule.Add(assign2);
-                                    }
+                                    Model.Task assign1 = new Model.Task(machine, taskTypes[1], date.AddHours(22), date.AddHours(30), nightemployees[nightworker]);
+                                    nightworker++;
+                                    Model.Task assign2 = new Model.Task(machine, taskTypes[1], date.AddHours(22), date.AddHours(30), nightemployees[nightworker]);
+                                    nightworker++;
+                                    Model.Task assign3 = new Model.Task(machine, taskTypes[1], date.AddHours(22), date.AddHours(30), nightemployees[nightworker]);
+                                    nightworker++;
+                                    Model.Task assign4 = new Model.Task(machine, taskTypes[1], date.AddHours(22), date.AddHours(30), nightemployees[nightworker]);
+                                    nightworker++;
+                                    Schedule.Add(assign1);
+                                    Schedule.Add(assign2);
+                                    Schedule.Add(assign3);
+                                    Schedule.Add(assign4);
                                 }
-                            }
+                        }                        
+                        if (machine.Name.Substring(0, machine.Name.Length - 2) == "Kar")
+                        {
+
+                                if (nightworker < nightemployees.Count - 1)
+                                {
+                                    Model.Task assign1 = new Model.Task(machine, taskTypes[0], date.AddHours(22), date.AddHours(30), nightemployees[nightworker]);
+                                    nightworker++;
+                                    Model.Task assign2 = new Model.Task(machine, taskTypes[0], date.AddHours(22), date.AddHours(30), nightemployees[nightworker]);
+                                    nightworker++;
+                                    Schedule.Add(assign1);
+                                    Schedule.Add(assign2);
+                                }
+                            
                         }
                     }
                 }
-            }
             Database.ProductionDB.AddTask(Schedule);
-            return Schedule;
+            return Schedule;            
+        }
+
+        private List<Employee> ShiftList(string shift)
+        {
+            List<Employee> employeeList = Database.ProductionDB.GetEmployees(0);
+            List<Employee> shiftTeam = new List<Employee>();
+            foreach (Employee emp in employeeList)
+            {
+                if (emp.WorkShift == shift)
+                {
+                    shiftTeam.Add(emp);
+                }
+            }
+            return shiftTeam;
         }
     }
 }

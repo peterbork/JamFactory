@@ -73,8 +73,8 @@ namespace JamFactory.Controller.Database
                         _Tasks.Add(new Model.Task(new Model.Machine(Convert.ToInt32(reader["MachineID"]),
                                                                     reader["Name"].ToString(), 
                                                                     Convert.ToInt32(reader["Capacity"]), 
-                                                                    Convert.ToDouble(reader["ScrapValue"]), 
-                                                                    Convert.ToDouble(reader["AuquistionValue"]), 
+                                                                    Convert.ToDouble(reader["ScrapValue"]),
+                                                                    Convert.ToDouble(reader["AcquisitionValue"]), 
                                                                     Convert.ToInt32(reader["LifeTime"])),
                                                   new Model.TaskType(reader["Description"].ToString(),
                                                                      Convert.ToInt32(reader["TaskTypeID"])), 
@@ -118,7 +118,7 @@ namespace JamFactory.Controller.Database
                         cmd.Parameters.Add(new SqlParameter("@StartTime", task.StartTime));
                         cmd.Parameters.Add(new SqlParameter("@EndTime", task.EndTime));
                         cmd.Parameters.Add(new SqlParameter("@TaskTypeID", task.WorkTask.ID));
-                        cmd.Parameters.Add(new SqlParameter("@MachineID", task.Machine.MachineID));
+                        cmd.Parameters.Add(new SqlParameter("@MachineID", task.WorkStation.MachineID));
                         cmd.ExecuteNonQuery();
                     }
                 }
