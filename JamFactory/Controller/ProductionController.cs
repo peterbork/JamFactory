@@ -104,7 +104,7 @@ namespace JamFactory.Controller {
                 List<Model.Task> ListOfTasks = new List<Model.Task>();
                 foreach (Model.Task t in _Tasks) 
                 {
-                    if (t.StartTime > MondayDate && t.EndTime < MondayDate.AddDays(1)) 
+                    if (t.StartTime.Day == MondayDate.Day) 
                     {
                         ListOfTasks.Add(t);
                     }
