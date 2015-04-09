@@ -169,7 +169,6 @@ namespace JamFactory.Controller.Database
         }
         public static List<Model.TaskType> GetTaskTypes(int taskTypeId)
         {
-            // Gets all tasks within the parameters
             List<Model.TaskType> taskTypes = new List<Model.TaskType>();
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
